@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+  <title>spider403绕过(urllib2+random） | Hexo</title>
+  <meta name="description" content="" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="MobileOptimized" content="320" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" type="text/css" href="/css/screen.css" />
+  <link rel="stylesheet" type="text/css" href="/css/style.css" />
+  <meta name="generator" content="Hexo">
+
+  
+  
+  
+
+  
+</head>
+
+<!--
+<body class="post-template">
+-->
+<body class="home-template">
+<div id="perspective" class="perspective effect-movedown">
+  <div class="container">
+    <!-- wrapper -->
+    <div class="wrapper">
+
+      <header class="site-head"  style="background: #24282b url(/img/img-bg.jpg) 0 -20%" >
+    <div class="vertical">
+        <div class="site-head-content inner">
+             <a class="blog-logo" href="/"><img src="/img/logo.svg" alt="Blog Logo"/></a> 
+            <h1 class="blog-title">Hexo</h1>
+            <h2 class="blog-description"><button id="showMenu">Show Menu</button></h2>
+        </div>
+    </div>
+</header>
+
+      
+
+<main class="content" role="main">
+  <article class="post">
+    <span class="post-meta">
+      <time datetime="2016-07-07T06:20:47.904Z" itemprop="datePublished">
+          2016-07-07
+      </time>
+    
+</span>
+    <h1 class="post-title">spider403绕过(urllib2+random）</h1>
+    <section class="post-content">
+      <h3 id="思路-模拟浏览器提交请求"><a href="#思路-模拟浏览器提交请求" class="headerlink" title="思路:模拟浏览器提交请求"></a>思路:模拟浏览器提交请求</h3><hr>
+<h3 id="方法1"><a href="#方法1" class="headerlink" title="方法1"></a>方法1</h3><p><strong>对象</strong>.<em>add_header()</em></p>
+<pre><code>__author__ = &apos;Willie&apos;
+import urllib2
+url = &quot;http://blog.csdn.net/vanpersie_9987/article/details/51837594&quot;
+web = urllib2.Request(url)//添加请求头部信息
+web.add_header(&quot;User-Agent&quot;,&quot;Mozilla/5.0 (Windows NT 10.0; WOW64; rv:47.0) Gecko/20100101 Firefox/47.0&quot;)
+web.add_header(&quot;Referer&quot;,&quot;http://blog.csdn.net/&quot;)
+web.add_header(&quot;Host&quot;,&quot;blog.csdn.net&quot;)
+web.add_header(&quot;GET&quot;,url)
+html = urllib2.urlopen(web).read()
+print html
+</code></pre><p><strong>或者</strong>(使用<em>urllib2</em>对象方法<em>Request</em>，用参数提交的方法把head信息作为字典的形式提交)</p>
+<pre><code>import urllib2
+url = &quot;http://blog.csdn.net/vanpersie_9987/article/details/51837594&quot;
+header = {&quot;User-Agent&quot;:&quot;Mozilla/5.0 (Windows NT 10.0; WOW64; rv:47.0) Gecko/20100101 Firefox/47.0&quot;,
+       &quot;Referer&quot;:&quot;http://blog.csdn.net/&quot;,
+       &quot;Host&quot;:&quot;blog.csdn.net&quot;,
+       &quot;GET&quot;:url}
+web = urllib2.Request(url,headers=header)
+html = urllib2.urlopen(web).read()
+print html
+</code></pre><hr>
+<h3 id="方法2"><a href="#方法2" class="headerlink" title="方法2"></a>方法2</h3><p><strong>模拟多浏览器进行浏览</strong>，<em>random+urllib</em><br>（使用<em>random</em>库中的<em>random.choice（）</em>方法使用不同的主机标示，模拟多台主机对网页进行访问）</p>
+<pre><code>import urllib2
+import random
+url = &quot;http://blog.csdn.net/vanpersie_9987/article/details/51837594&quot;
+Re = &quot;http://blog.csdn.net/&quot;
+He = &quot;blog.csdn.net&quot;
+
+def choice(url,Re,He):
+heads = [&quot;User-Agent:Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_8; en-us) AppleWebKit/534.50 (KHTML, like Gecko) Version/5.1 Safari/534.50&quot;,
+     &quot;User-Agent:Mozilla/5.0 (Windows; U; Windows NT 6.1; en-us) AppleWebKit/534.50 (KHTML, like Gecko) Version/5.1 Safari/534.50&quot;,
+     &quot;User-Agent:Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0&quot;,
+     &quot;User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.6; rv:2.0.1) Gecko/20100101 Firefox/4.0.1&quot;,
+     &quot;User-Agent:Opera/9.80 (Macintosh; Intel Mac OS X 10.6.8; U; en) Presto/2.8.131 Version/11.11&quot;,
+     &quot;User-Agent: Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; 360SE&quot;]
+ranHead = random.choice(heads)
+web = urllib2.Request(url)
+web.add_header(&quot;User-Agent&quot;,ranHead)
+web.add_header(&quot;Referer&quot;,Re)
+web.add_header(&quot;Host&quot;,He)
+web.add_header(&quot;GET&quot;,url)
+html = urllib2.urlopen(web).read()
+return html
+
+print choice(url,Re,He)
+</code></pre>
+    </section>
+    <footer class="post-footer">
+      <section class="author">
+    <h4>John Doe</h4>
+    <p>作为挨踢业的伪设计狮伪技术牛 搬过砖也种过地：爱看、爱听、爱玩儿、爱折腾、机械水电、泥瓦木匠啥都来</p>
+</section>
+      <section class="share">
+    <h4>Share this post</h4>
+    <a class="icon-sina-weibo" href="http://v.t.sina.com.cn/share/share.php?title=作为挨踢业的伪设计狮伪技术牛 搬过砖也种过地：爱看、爱听、爱玩儿、爱折腾、机械水电、泥瓦木匠啥都来 ?url=http://yoursite.com/2016/07/07/spider403绕过（urllib2+random）/" target="_blank">
+        <span class="hidden">weibo</span>
+    </a>
+    <a class="icon-twitter" href="http://twitter.com/share?url=http://yoursite.com/2016/07/07/spider403绕过（urllib2+random）/"
+       onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+        <span class="hidden">Twitter</span>
+    </a>
+    <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2016/07/07/spider403绕过（urllib2+random）/"
+       onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+        <span class="hidden">Facebook</span>
+    </a>
+    <a class="icon-google-plus" href="https://plus.google.com/share?url=http://yoursite.com/2016/07/07/spider403绕过（urllib2+random）/"
+       onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+        <span class="hidden">Google+</span>
+    </a>
+</section>
+
+    </footer>
+  </article>
+  <nav class="pagination" role="pagination">
+    
+    <span class="icon-logo">•</span>
+    
+</nav>
+
+  <div id="comment" class="comments-area">
+    <h4 class="title"><a href="#disqus_comments" name="disqus_comments">Comments</a></h4>
+    
+</div>
+
+</main>
+
+
+      
+<footer class="site-footer">
+  
+  <div class="inner">
+     <section class="copyright">All content copyright <a href="/">Hexo</a> &copy; 2014 &bull; All rights reserved.</section>
+     <section class="poweredby">Proudly published with <a class="icon-ghost" href="http://zespia.tw/hexo/">Hexo</a></section>
+  </div>
+</footer>
+
+      <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+<script type="text/javascript" src="/js/jquery.fitvids.js"></script>
+<script type="text/javascript" src="/js/index.js"></script>
+<script type="text/javascript" src="/js/menu.js"></script>
+
+
+
+
+
+  </div>
+</div>
+
+<nav  class="outer-nav top horizontal">
+
+          <a class="icon-home"  href="/"><span>Home</span></a>
+
+          <a class="icon-news"  href="/archive"><span>Archive</span></a>
+
+          <a class="icon-image"  href="/images"><span>Images</span></a>
+
+          <a class="icon-wiki"  href="/wiki/2014-10-28-wiki/"><span>Wiki</span></a>
+
+          <a class="icon-Favorites"  href="/favorites"><span>Favorites</span></a>
+
+          <a class="icon-mail"  href="/about/2014-09-11-mabao/"><span>Contact</span></a>
+
+</nav>
+
+</div>
+</body>
+</html>
