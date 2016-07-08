@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+  <title>willie&#39;s blog</title>
+  <meta name="description" content="" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="MobileOptimized" content="320" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" type="text/css" href="/css/screen.css" />
+  <link rel="stylesheet" type="text/css" href="/css/style.css" />
+  <meta name="generator" content="willie's blog">
+
+  
+  
+  
+
+  
+</head>
+
+<!--
+<body class="post-template">
+-->
+<body class="home-template">
+<div id="perspective" class="perspective effect-movedown">
+  <div class="container">
+    <!-- wrapper -->
+    <div class="wrapper">
+
+      <header class="site-head"  style="background: #24282b url(/img/img-bg.jpg) 0 -20%" >
+    <div class="vertical">
+        <div class="site-head-content inner">
+             <a class="blog-logo" href="/"><img src="/img/logo.svg" alt="Blog Logo"/></a> 
+            <h1 class="blog-title">willie's blog</h1>
+            <h2 class="blog-description"><button id="showMenu">Show Menu</button></h2>
+        </div>
+    </div>
+</header>
+
+      
+
+<main class="content" role="main">
+  <article class="post">
+    <span class="post-meta">
+      <time datetime="2016-07-08T01:37:44.030Z" itemprop="datePublished">
+          2016-07-08
+      </time>
+    
+</span>
+    <h1 class="post-title"></h1>
+    <section class="post-content">
+      <p> node.js+hexo+git+github搭建博客</p>
+<hr>
+<ul>
+<li>首先下载安装node.js+git</li>
+</ul>
+<hr>
+<h1 id="git"><a href="#git" class="headerlink" title="git"></a>git</h1><hr>
+<ol>
+<li>ssh-keygen -t rsa -C “williesec@yeah.net”</li>
+<li>将生成的id_rsa.pub中的内容拷贝到github中</li>
+<li><p>ssh -T git@github.com</p>
+<p> Hi cnfeat! You’ve successfully authenticated, but GitHub does not provide shell access.</p>
+</li>
+</ol>
+<hr>
+<h1 id="hexo"><a href="#hexo" class="headerlink" title="hexo"></a>hexo</h1><hr>
+<ul>
+<li><p>然后安装npm install -g hexo</p>
+<p>  hexo init //生成相关文件<br>  hexo generate //创建静态网页文件<br>  hexo server //启动本地hexo服务，通过4000端口访问</p>
+</li>
+</ul>
+<hr>
+<h1 id="github"><a href="#github" class="headerlink" title="github"></a>github</h1><hr>
+<ul>
+<li>创建库名称为：用户名.github.io</li>
+<li>在库的setting中添加 域名不需要www</li>
+</ul>
+<hr>
+<p>域名商网站中添加域名指向</p>
+<hr>
+<ul>
+<li>CNAME @   username.github.io</li>
+<li>CNAME www username.github.io</li>
+</ul>
+<p><img src="http://i.imgur.com/328vGAj.png" alt=""></p>
+
+    </section>
+    <footer class="post-footer">
+      <section class="author">
+    <h4>Willie</h4>
+    <p>哇哦哦，动感超人的动感</p>
+</section>
+      <section class="share">
+    <h4>Share this post</h4>
+    <a class="icon-sina-weibo" href="http://v.t.sina.com.cn/share/share.php?title=哇哦哦，动感超人的动感 ?url=http://yoursite.com/2016/07/08/hexo搭建博客/" target="_blank">
+        <span class="hidden">weibo</span>
+    </a>
+    <a class="icon-twitter" href="http://twitter.com/share?url=http://yoursite.com/2016/07/08/hexo搭建博客/"
+       onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+        <span class="hidden">Twitter</span>
+    </a>
+    <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2016/07/08/hexo搭建博客/"
+       onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+        <span class="hidden">Facebook</span>
+    </a>
+    <a class="icon-google-plus" href="https://plus.google.com/share?url=http://yoursite.com/2016/07/08/hexo搭建博客/"
+       onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+        <span class="hidden">Google+</span>
+    </a>
+</section>
+
+    </footer>
+  </article>
+  <nav class="pagination" role="pagination">
+    
+    <span class="icon-logo">•</span>
+    
+    <a class="older-posts" href="/2016/07/07/spider403绕过（urllib2+random）/">
+        spider403绕过(urllib2+random） →
+    </a>
+    
+</nav>
+
+  <div id="comment" class="comments-area">
+    <h4 class="title"><a href="#disqus_comments" name="disqus_comments">Comments</a></h4>
+    
+</div>
+
+</main>
+
+
+      
+<footer class="site-footer">
+  
+  <div class="inner">
+     <section class="copyright">All content copyright <a href="/">willie's blog</a> &copy; 2014 &bull; All rights reserved.</section>
+     <section class="poweredby">Proudly published with <a class="icon-ghost" href="http://zespia.tw/hexo/">Hexo</a></section>
+  </div>
+</footer>
+
+      <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+<script type="text/javascript" src="/js/jquery.fitvids.js"></script>
+<script type="text/javascript" src="/js/index.js"></script>
+<script type="text/javascript" src="/js/menu.js"></script>
+
+
+
+
+
+  </div>
+</div>
+
+<nav  class="outer-nav top horizontal">
+
+          <a class="icon-home"  href="/"><span>Home</span></a>
+
+          <a class="icon-news"  href="/archive"><span>Archive</span></a>
+
+          <a class="icon-image"  href="/images"><span>Images</span></a>
+
+          <a class="icon-wiki"  href="/wiki/2014-10-28-wiki/"><span>Wiki</span></a>
+
+          <a class="icon-Favorites"  href="/favorites"><span>Favorites</span></a>
+
+          <a class="icon-mail"  href="/about/2014-09-11-mabao/"><span>Contact</span></a>
+
+</nav>
+
+</div>
+</body>
+</html>
